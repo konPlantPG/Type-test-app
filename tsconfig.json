@@ -18,7 +18,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "types": ["@testing-library/jest-dom"] // この行を追加
   },
   "include": [
     "next-env.d.ts",

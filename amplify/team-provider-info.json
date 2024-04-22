@@ -24,6 +24,12 @@
       },
       "auth": {
         "typeinvestmentapp8b1fd770": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3e5poj0nglv43",
+          "type": "manual"
+        }
       }
     }
   }
