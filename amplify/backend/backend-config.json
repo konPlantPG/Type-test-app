@@ -1,0 +1,96 @@
+{
+  "api": {
+    "typeinvestmentapp": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2025-04-15T00:54:36.040Z",
+              "apiKeyExpirationDays": 365,
+              "description": "stockDataGet"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "typeinvestmentapp8b1fd770": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "typeinvestmentapp643bdace": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "typeinvestmentapp"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_typeinvestmentapp643bdace_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "typeinvestmentapp643bdace"
+        }
+      ]
+    },
+    "AMPLIFY_function_typeinvestmentapp643bdace_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "typeinvestmentapp643bdace"
+        }
+      ]
+    },
+    "AMPLIFY_function_typeinvestmentapp643bdace_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "typeinvestmentapp643bdace"
+        }
+      ]
+    }
+  }
+}

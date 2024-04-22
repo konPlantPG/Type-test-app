@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-typeinvestmentapp-dev-fdf27-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891377283693:role/amplify-typeinvestmentapp-dev-fdf27-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891377283693:role/amplify-typeinvestmentapp-dev-fdf27-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-typeinvestmentapp-dev-fdf27-deployment",
+      "UnauthRoleName": "amplify-typeinvestmentapp-dev-fdf27-unauthRole",
+      "StackName": "amplify-typeinvestmentapp-dev-fdf27",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:891377283693:stack/amplify-typeinvestmentapp-dev-fdf27/1aae0c10-f7fb-11ee-b329-0eaa6d8266f1",
+      "AmplifyAppId": "d3e5poj0nglv43"
+    },
+    "categories": {
+      "api": {
+        "typeinvestmentapp": {}
+      },
+      "function": {
+        "typeinvestmentapp643bdace": {
+          "secretsPathAmplifyAppId": "d3e5poj0nglv43",
+          "deploymentBucketName": "amplify-typeinvestmentapp-dev-fdf27-deployment",
+          "s3Key": "amplify-builds/typeinvestmentapp643bdace-53444676374835765167-build.zip"
+        }
+      },
+      "auth": {
+        "typeinvestmentapp8b1fd770": {}
+      }
+    }
+  }
+}
