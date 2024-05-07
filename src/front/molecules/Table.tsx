@@ -12,13 +12,13 @@ const Table = (props: TableProps) => {
         height: props.height ? `${props.height}px` : '500px', // heightプロパティがあればその値を使用し、なければデフォルトの400pxを使用
         width: '100%'
     };
-
+    
     return (
         <div className="flex justify-center">
             <div style={tableStyle}>
                 <DataGrid
                     columns={props.columns || []}
-                    rows={props.rows || []}
+                    rows={props.rows || []} // rows プロパティを追加
                 />
             </div>
         </div>  

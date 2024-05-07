@@ -8,6 +8,22 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const searchSimilarStocks = /* GraphQL */ `query SearchSimilarStocks($keyword: String!) {
+  searchSimilarStocks(keyword: $keyword) {
+    id
+    code
+    name
+    price
+    dividend
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchSimilarStocksQueryVariables,
+  APITypes.SearchSimilarStocksQuery
+>;
 export const getStock = /* GraphQL */ `query GetStock($id: ID!) {
   getStock(id: $id) {
     id

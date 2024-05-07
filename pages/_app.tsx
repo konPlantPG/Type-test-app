@@ -5,7 +5,6 @@ import type { AppProps } from "next/app";
 import Header from "./Header";
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log("test")
   return (
     <>
       <Header/>

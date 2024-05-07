@@ -258,6 +258,23 @@ export type DeleteStockMutation = {
   } | null,
 };
 
+export type SearchSimilarStocksQueryVariables = {
+  keyword: string,
+};
+
+export type SearchSimilarStocksQuery = {
+  searchSimilarStocks?:  Array< {
+    __typename: "Stock",
+    id: string,
+    code: string,
+    name: string,
+    price?: number | null,
+    dividend?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null > | null,
+};
+
 export type GetStockQueryVariables = {
   id: string,
 };

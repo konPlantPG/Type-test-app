@@ -10,3 +10,7 @@ type Stock @model {
   dividend: Float
   createdAt: AWSDateTime!
 }
+
+type Query {
+  searchSimilarStocks(keyword: String!): [Stock] @function(name: "searchSimilarStocksFunction-${env}")
+}

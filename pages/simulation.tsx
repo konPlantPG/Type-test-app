@@ -3,7 +3,7 @@ import { API,  graphqlOperation } from '@aws-amplify/api';
 import { stockByName } from '../src/graphql/queries';
 import SimulationTemplate from '../src/front/simulationComponents/SumulationTemplate'
 // import SimulationTemplate from './components/simulationComponents/SimulationTemplate'
-
+import { searchSimilarStocks } from '../src/graphql/queries';
 
 const Simulation = () => {
   
@@ -11,18 +11,18 @@ const Simulation = () => {
 
 
   useEffect(() => {
-    const fetchStockByName = async () => {
+    const fetchSimilarStocks = async () => {
       if (query.trim() !== '') {
         try {
-          const stockData = await API.graphql(graphqlOperation(stockByName, { name: query }));
+          const stockData = await API.graphql(graphqlOperation(searchSimilarStocks, { keyword: query }));
           console.log(stockData);
         } catch (error) {
-          console.error('Error fetching stocks', error);
+          console.error('Error fetching similar stocks', error);
         }
       }
     };
 
-    fetchStockByName();
+    fetchSimilarStocks();
   }, [query]);
  
   return (
