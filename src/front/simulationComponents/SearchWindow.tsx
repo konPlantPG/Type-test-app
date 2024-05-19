@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-type SearchWindowProps =  {
-    query: string;
-    setQuery: React.Dispatch<React.SetStateAction<string>>;
-    searchResults: any[];
-    setSelectedItem: (item: any) => void;
+type SearchWindowProps = {
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  searchResults: any[];
+  setSelectedItem: (item: any) => void; // This might be redundant if you're using addItem to handle item selection
+  addItem: (item: any) => void; // Add this line
 }
 
 const SearchWindow: React.FC<SearchWindowProps> = (props) =>  {
@@ -26,9 +27,9 @@ const SearchWindow: React.FC<SearchWindowProps> = (props) =>  {
   };
 
   const handleSelectItem = (item: any) => {
-    props.setSelectedItem(item);  // 選択されたアイテムを設定
-    setShowDropdown(false);  // ドロップダウンを閉じる
-  };
+    props.addItem(item);
+    setShowDropdown(false);
+};
 
   return (
     <div className="items-center mx-auto w-1/2">
