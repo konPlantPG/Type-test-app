@@ -1,7 +1,3 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
 type Stock @model {
   id: ID!
   code: String!
@@ -9,8 +5,12 @@ type Stock @model {
   price: Float
   dividend: Float
   createdAt: AWSDateTime!
+  clicks: [Click] @hasMany(fields: ["id"])
 }
 
-type Query {
-  searchSimilarStocks(keyword: String!): [Stock] @function(name: "searchSimilarStocksFunction-${env}")
+type Click @model {
+  id: ID!
+  stockId: ID!
+  stock: Stock @belongsTo(fields: ["stockId"])
+  createdAt: AWSDateTime!
 }

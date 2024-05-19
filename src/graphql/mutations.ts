@@ -19,6 +19,10 @@ export const createStock = /* GraphQL */ `mutation CreateStock(
     price
     dividend
     createdAt
+    clicks {
+      nextToken
+      __typename
+    }
     updatedAt
     __typename
   }
@@ -38,6 +42,10 @@ export const updateStock = /* GraphQL */ `mutation UpdateStock(
     price
     dividend
     createdAt
+    clicks {
+      nextToken
+      __typename
+    }
     updatedAt
     __typename
   }
@@ -57,6 +65,10 @@ export const deleteStock = /* GraphQL */ `mutation DeleteStock(
     price
     dividend
     createdAt
+    clicks {
+      nextToken
+      __typename
+    }
     updatedAt
     __typename
   }
@@ -64,4 +76,82 @@ export const deleteStock = /* GraphQL */ `mutation DeleteStock(
 ` as GeneratedMutation<
   APITypes.DeleteStockMutationVariables,
   APITypes.DeleteStockMutation
+>;
+export const createClick = /* GraphQL */ `mutation CreateClick(
+  $input: CreateClickInput!
+  $condition: ModelClickConditionInput
+) {
+  createClick(input: $input, condition: $condition) {
+    id
+    stockId
+    stock {
+      id
+      code
+      name
+      price
+      dividend
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateClickMutationVariables,
+  APITypes.CreateClickMutation
+>;
+export const updateClick = /* GraphQL */ `mutation UpdateClick(
+  $input: UpdateClickInput!
+  $condition: ModelClickConditionInput
+) {
+  updateClick(input: $input, condition: $condition) {
+    id
+    stockId
+    stock {
+      id
+      code
+      name
+      price
+      dividend
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateClickMutationVariables,
+  APITypes.UpdateClickMutation
+>;
+export const deleteClick = /* GraphQL */ `mutation DeleteClick(
+  $input: DeleteClickInput!
+  $condition: ModelClickConditionInput
+) {
+  deleteClick(input: $input, condition: $condition) {
+    id
+    stockId
+    stock {
+      id
+      code
+      name
+      price
+      dividend
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteClickMutationVariables,
+  APITypes.DeleteClickMutation
 >;

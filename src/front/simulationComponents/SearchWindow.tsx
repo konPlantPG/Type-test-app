@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { API,  graphqlOperation } from '@aws-amplify/api';
+import { createClick } from '../../graphql/mutations';
 
 type SearchWindowProps = {
   query: string;
@@ -26,10 +28,20 @@ const SearchWindow: React.FC<SearchWindowProps> = (props) =>  {
     setShowDropdown(false);
   };
 
-  const handleSelectItem = (item: any) => {
+  const handleSelectItem = async (item: any) => {
     props.addItem(item);
     setShowDropdown(false);
-};
+  
+    try {
+      const clickData = {
+        stockId: item.id
+      };
+      await API.graphql(graphqlOperation(createClick, { input: clickData }));
+      console.log('Click event recorded');
+    } catch (error) {
+      console.error('Error recording click event:', error);
+    }
+  };
 
   return (
     <div className="items-center mx-auto w-1/2">

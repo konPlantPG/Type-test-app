@@ -8,22 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const searchSimilarStocks = /* GraphQL */ `query SearchSimilarStocks($keyword: String!) {
-  searchSimilarStocks(keyword: $keyword) {
-    id
-    code
-    name
-    price
-    dividend
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SearchSimilarStocksQueryVariables,
-  APITypes.SearchSimilarStocksQuery
->;
 export const getStock = /* GraphQL */ `query GetStock($id: ID!) {
   getStock(id: $id) {
     id
@@ -32,6 +16,10 @@ export const getStock = /* GraphQL */ `query GetStock($id: ID!) {
     price
     dividend
     createdAt
+    clicks {
+      nextToken
+      __typename
+    }
     updatedAt
     __typename
   }
@@ -60,6 +48,47 @@ export const listStocks = /* GraphQL */ `query ListStocks(
 ` as GeneratedQuery<
   APITypes.ListStocksQueryVariables,
   APITypes.ListStocksQuery
+>;
+export const getClick = /* GraphQL */ `query GetClick($id: ID!) {
+  getClick(id: $id) {
+    id
+    stockId
+    stock {
+      id
+      code
+      name
+      price
+      dividend
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetClickQueryVariables, APITypes.GetClickQuery>;
+export const listClicks = /* GraphQL */ `query ListClicks(
+  $filter: ModelClickFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listClicks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      stockId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListClicksQueryVariables,
+  APITypes.ListClicksQuery
 >;
 export const stockByName = /* GraphQL */ `query StockByName(
   $name: String!

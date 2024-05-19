@@ -83,6 +83,22 @@ export type Stock = {
   price?: number | null,
   dividend?: number | null,
   createdAt: string,
+  clicks?: ModelClickConnection | null,
+  updatedAt: string,
+};
+
+export type ModelClickConnection = {
+  __typename: "ModelClickConnection",
+  items:  Array<Click | null >,
+  nextToken?: string | null,
+};
+
+export type Click = {
+  __typename: "Click",
+  id: string,
+  stockId: string,
+  stock?: Stock | null,
+  createdAt: string,
   updatedAt: string,
 };
 
@@ -99,17 +115,19 @@ export type DeleteStockInput = {
   id: string,
 };
 
-export type ModelStockFilterInput = {
-  id?: ModelIDInput | null,
-  code?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  price?: ModelFloatInput | null,
-  dividend?: ModelFloatInput | null,
+export type CreateClickInput = {
+  id?: string | null,
+  stockId: string,
+  createdAt?: string | null,
+};
+
+export type ModelClickConditionInput = {
+  stockId?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
+  and?: Array< ModelClickConditionInput | null > | null,
+  or?: Array< ModelClickConditionInput | null > | null,
+  not?: ModelClickConditionInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelStockFilterInput | null > | null,
-  or?: Array< ModelStockFilterInput | null > | null,
-  not?: ModelStockFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -128,10 +146,43 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type UpdateClickInput = {
+  id: string,
+  stockId?: string | null,
+  createdAt?: string | null,
+};
+
+export type DeleteClickInput = {
+  id: string,
+};
+
+export type ModelStockFilterInput = {
+  id?: ModelIDInput | null,
+  code?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  price?: ModelFloatInput | null,
+  dividend?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelStockFilterInput | null > | null,
+  or?: Array< ModelStockFilterInput | null > | null,
+  not?: ModelStockFilterInput | null,
+};
+
 export type ModelStockConnection = {
   __typename: "ModelStockConnection",
   items:  Array<Stock | null >,
   nextToken?: string | null,
+};
+
+export type ModelClickFilterInput = {
+  id?: ModelIDInput | null,
+  stockId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelClickFilterInput | null > | null,
+  or?: Array< ModelClickFilterInput | null > | null,
+  not?: ModelClickFilterInput | null,
 };
 
 export type ModelStringKeyConditionInput = {
@@ -204,6 +255,15 @@ export type ModelSubscriptionFloatInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionClickFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  stockId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionClickFilterInput | null > | null,
+  or?: Array< ModelSubscriptionClickFilterInput | null > | null,
+};
+
 export type CreateStockMutationVariables = {
   input: CreateStockInput,
   condition?: ModelStockConditionInput | null,
@@ -218,6 +278,10 @@ export type CreateStockMutation = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
@@ -236,6 +300,10 @@ export type UpdateStockMutation = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
@@ -254,25 +322,87 @@ export type DeleteStockMutation = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
 
-export type SearchSimilarStocksQueryVariables = {
-  keyword: string,
+export type CreateClickMutationVariables = {
+  input: CreateClickInput,
+  condition?: ModelClickConditionInput | null,
 };
 
-export type SearchSimilarStocksQuery = {
-  searchSimilarStocks?:  Array< {
-    __typename: "Stock",
+export type CreateClickMutation = {
+  createClick?:  {
+    __typename: "Click",
     id: string,
-    code: string,
-    name: string,
-    price?: number | null,
-    dividend?: number | null,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
-  } | null > | null,
+  } | null,
+};
+
+export type UpdateClickMutationVariables = {
+  input: UpdateClickInput,
+  condition?: ModelClickConditionInput | null,
+};
+
+export type UpdateClickMutation = {
+  updateClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteClickMutationVariables = {
+  input: DeleteClickInput,
+  condition?: ModelClickConditionInput | null,
+};
+
+export type DeleteClickMutation = {
+  deleteClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type GetStockQueryVariables = {
@@ -288,6 +418,10 @@ export type GetStockQuery = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
@@ -308,6 +442,50 @@ export type ListStocksQuery = {
       name: string,
       price?: number | null,
       dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetClickQueryVariables = {
+  id: string,
+};
+
+export type GetClickQuery = {
+  getClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListClicksQueryVariables = {
+  filter?: ModelClickFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClicksQuery = {
+  listClicks?:  {
+    __typename: "ModelClickConnection",
+    items:  Array< {
+      __typename: "Click",
+      id: string,
+      stockId: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -354,6 +532,10 @@ export type OnCreateStockSubscription = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
@@ -371,6 +553,10 @@ export type OnUpdateStockSubscription = {
     price?: number | null,
     dividend?: number | null,
     createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
     updatedAt: string,
   } | null,
 };
@@ -387,6 +573,82 @@ export type OnDeleteStockSubscription = {
     name: string,
     price?: number | null,
     dividend?: number | null,
+    createdAt: string,
+    clicks?:  {
+      __typename: "ModelClickConnection",
+      nextToken?: string | null,
+    } | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateClickSubscriptionVariables = {
+  filter?: ModelSubscriptionClickFilterInput | null,
+};
+
+export type OnCreateClickSubscription = {
+  onCreateClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateClickSubscriptionVariables = {
+  filter?: ModelSubscriptionClickFilterInput | null,
+};
+
+export type OnUpdateClickSubscription = {
+  onUpdateClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteClickSubscriptionVariables = {
+  filter?: ModelSubscriptionClickFilterInput | null,
+};
+
+export type OnDeleteClickSubscription = {
+  onDeleteClick?:  {
+    __typename: "Click",
+    id: string,
+    stockId: string,
+    stock?:  {
+      __typename: "Stock",
+      id: string,
+      code: string,
+      name: string,
+      price?: number | null,
+      dividend?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
